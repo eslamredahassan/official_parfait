@@ -1,0 +1,141 @@
+const { MessageActionRow, MessageButton, MessageEmbed, Modal, TextInputComponent } = require("discord.js");
+const interface = require("../assest/interface.js");
+const banners = require("../assest/banners.js");
+const color = require("../assest/color.js");
+const emojis = require("../assest/emojis");
+const moment = require("moment");
+require("moment-duration-format");
+
+module.exports = async (client, config) => {
+
+  let guild = client.guilds.cache.get(config.guildID);
+
+  client.on("interactionCreate", async (interaction) => {
+    if (interaction.isButton()) {
+      switch (interaction.customId) {
+        case "#setup_maintenance":
+          {
+            //// Modal application code ///
+            let maintenance_modal = new Modal()
+              .setTitle(`🧪 Developer Mode`)
+              .setCustomId(`maintenance_modal`);
+
+            const password = new TextInputComponent()
+              .setCustomId("ap_password")
+              .setLabel(`Enter The Password`.substring(0, 45))
+              .setMinLength(1)
+              .setMaxLength(17)
+              .setRequired(true)
+              .setPlaceholder(`Enter the password here`)
+              .setStyle(1);
+
+            let row_password = new MessageActionRow().addComponents(password);
+            maintenance_modal.addComponents(row_password);
+            await interaction.showModal(maintenance_modal);
+
+          }
+          break;
+        default:
+          break;
+      }
+    }
+    const answers = { [0]: "Es17lam12Re19da95" };
+    function getRandomInt(max) { return Math.floor(Math.random() * max) };
+    const passwords = getRandomInt(0);
+
+    //// Send application results in review room ////
+    if (interaction.customId === 'maintenance_modal') {
+      const password = interaction.fields.getTextInputValue("ap_password");
+
+      /// Embed of data in review room ///
+      let buttons = new MessageActionRow().addComponents([
+        new MessageButton()
+          .setStyle(2)
+          .setDisabled(true)
+          .setCustomId("#about-menu")
+          .setLabel("About us")
+          .setEmoji(emojis.aboutSun),
+        new MessageButton()
+          .setStyle(2)
+          .setDisabled(true)
+          .setCustomId("#faq")
+          .setLabel("FAQ")
+          .setEmoji(emojis.faq),
+        new MessageButton()
+          .setStyle(2)
+          .setDisabled(true)
+          .setCustomId("#requirements")
+          .setLabel("Sun Application")
+          .setEmoji(emojis.requirements),
+        new MessageButton()
+          .setStyle(2)
+          .setDisabled(false)
+          .setCustomId("#open")
+          .setLabel(" ")
+          .setEmoji(emojis.start),
+      ]);
+
+      if (password.toLowerCase() == answers[passwords].toLowerCase()) {
+        let applyChannel = interaction.guild.channels.cache.get(config.applyChannel);
+        if (!applyChannel) return;
+
+        applyChannel.send({
+          embeds: [
+            new MessageEmbed()
+              .setColor(color.gray)
+              .setTitle(`${emojis.app} ${interaction.guild.name}\n${emojis.threadMark}Recruitments Application System`)
+              .setDescription(interface.maintenanceMessage)
+              //.setThumbnail(`https://i.imgur.com/Ly7vC7l.png`)
+              .setImage(banners.maintenance)
+              .setTimestamp()
+              .setFooter({
+                ///text: `This is for Staff members only, no one else can see it`,
+                text: `Parfait under maintenance now`,
+                iconURL: banners.parfaitIcon,
+              }),
+          ],
+          components: [buttons],
+        });
+        console.log(
+          `\x1b[31m 〢`,
+          `\x1b[30m ${moment(Date.now()).format("LT")}`,
+          `\x1b[34m ${interaction.user.username}`,
+          `\x1b[32m SETUP MAINTENANCE MODE`
+        );
+        return await interaction.update({
+          embeds: [
+            {
+              title: `${emojis.check} Maintenance Interface`,
+              description: `${emojis.threadMark} Maintenance Interface has been set up in ${applyChannel}`,
+              //thumbnail: { url: `${banners.maintenanceIcon}` },
+              color: color.gray,
+            },
+          ],
+          //this is the important part
+          ephemeral: true,
+          components: [],
+        });
+      } else {
+        console.log(
+          `\x1b[31m 〢`,
+          `\x1b[30m ${moment(Date.now()).format("LT")}`,
+          `\x1b[34m ${interaction.user.username}`,
+          `\x1b[31m ENTERED INCORRECT PASSWORD`
+        );
+        return await interaction.update({
+          embeds: [
+            {
+              title: `${emojis.cross} Incorrect password`,
+              description: `Sorry ${interaction.user}, password incorrectly.`,
+              //thumbnail: { url: `${banners.maintenanceIcon}` },
+              color: color.gray,
+            },
+          ],
+          //this is the important part
+          ephemeral: true,
+          components: [],
+        });
+      };
+    }
+  });
+};
