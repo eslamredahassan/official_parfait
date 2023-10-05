@@ -10,7 +10,7 @@
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
     "node .": {
-      "name": "Parfait ᴰᴱⱽ",
+      "name": "Official Parfait",
       "command": "node .",
       "runAtStart": true,
       "preview": {
