@@ -14,6 +14,7 @@ module.exports = {
 
   warning: `${emojis.threadMarkmid} Complete your application inside your thread\n${emojis.threadMarkmid} After applying, stay alert in your thread post\n${emojis.threadMarkmid} Reviewing the application may take a long time\n ${emojis.threadMark} Un-compeleted application will be rejected`,
 
+  importantNote: `${emojis.threadMark} Required rank isn't important in the first week of each season`,
   //--------------------------------------//,
 
   ///---| DM Messages |---///
