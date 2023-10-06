@@ -1,4 +1,11 @@
-const { MessageActionRow, MessageButton, MessageEmbed, Modal, TextInputComponent } = require("discord.js");
+const {
+  MessageActionRow,
+  MessageButton,
+  MessageEmbed,
+  Modal,
+  TextInputComponent,
+} = require("discord.js");
+
 const interface = require("../assest/interface.js");
 const banners = require("../assest/banners.js");
 const color = require("../assest/color.js");
@@ -7,7 +14,6 @@ const moment = require("moment");
 require("moment-duration-format");
 
 module.exports = async (client, config) => {
-
   let guild = client.guilds.cache.get(config.guildID);
 
   client.on("interactionCreate", async (interaction) => {
@@ -21,7 +27,7 @@ module.exports = async (client, config) => {
               .setCustomId(`maintenance_modal`);
 
             const password = new TextInputComponent()
-              .setCustomId("ap_password")
+              .setCustomId("dev_password")
               .setLabel(`Enter The Password`.substring(0, 45))
               .setMinLength(1)
               .setMaxLength(17)
@@ -29,10 +35,19 @@ module.exports = async (client, config) => {
               .setPlaceholder(`Enter the password here`)
               .setStyle(1);
 
-            let row_password = new MessageActionRow().addComponents(password);
-            maintenance_modal.addComponents(row_password);
-            await interaction.showModal(maintenance_modal);
+            const note = new TextInputComponent()
+              .setCustomId("dev_note")
+              .setLabel(`Developer Note`.substring(0, 45))
+              .setMinLength(1)
+              .setMaxLength(365)
+              .setRequired(false)
+              .setPlaceholder(`Enter your note here`)
+              .setStyle(2);
 
+            let row_password = new MessageActionRow().addComponents(password);
+            let row_note = new MessageActionRow().addComponents(note);
+            maintenance_modal.addComponents(row_password, row_note);
+            await interaction.showModal(maintenance_modal);
           }
           break;
         default:
@@ -40,12 +55,15 @@ module.exports = async (client, config) => {
       }
     }
     const answers = { [0]: "Es17lam12Re19da95" };
-    function getRandomInt(max) { return Math.floor(Math.random() * max) };
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
     const passwords = getRandomInt(0);
 
     //// Send application results in review room ////
-    if (interaction.customId === 'maintenance_modal') {
-      const password = interaction.fields.getTextInputValue("ap_password");
+    if (interaction.customId === "maintenance_modal") {
+      const password = interaction.fields.getTextInputValue("dev_password");
+      const note = interaction.fields.getTextInputValue("dev_note");
 
       /// Embed of data in review room ///
       let buttons = new MessageActionRow().addComponents([
@@ -76,16 +94,25 @@ module.exports = async (client, config) => {
       ]);
 
       if (password.toLowerCase() == answers[passwords].toLowerCase()) {
-        let applyChannel = interaction.guild.channels.cache.get(config.applyChannel);
+        let applyChannel = interaction.guild.channels.cache.get(
+          config.applyChannel,
+        );
         if (!applyChannel) return;
 
         applyChannel.send({
           embeds: [
             new MessageEmbed()
               .setColor(color.gray)
-              .setTitle(`${emojis.app} ${interaction.guild.name}\n${emojis.threadMark}Recruitments Application System`)
+              .setTitle(
+                `${emojis.app} ${interaction.guild.name}\n${emojis.threadMark}Recruitments Application System`,
+              )
               .setDescription(interface.maintenanceMessage)
-              //.setThumbnail(`https://i.imgur.com/Ly7vC7l.png`)
+              //.setThumbnail(Logo)
+              .addFields({
+                name: `${emojis.dev} Developer Note`,
+                value: note || fieldsText.noDevNote,
+                inline: true,
+              })
               .setImage(banners.maintenance)
               .setTimestamp()
               .setFooter({
@@ -97,10 +124,10 @@ module.exports = async (client, config) => {
           components: [buttons],
         });
         console.log(
-          `\x1b[31m 〢`,
-          `\x1b[30m ${moment(Date.now()).format("LT")}`,
+          `\x1b[31m  〢`,
+          `\x1b[33m ${moment(Date.now()).format("LT")}`,
           `\x1b[34m ${interaction.user.username}`,
-          `\x1b[32m SETUP MAINTENANCE MODE`
+          `\x1b[32m SETUP MAINTENANCE MODE`,
         );
         return await interaction.update({
           embeds: [
@@ -117,10 +144,10 @@ module.exports = async (client, config) => {
         });
       } else {
         console.log(
-          `\x1b[31m 〢`,
-          `\x1b[30m ${moment(Date.now()).format("LT")}`,
+          `\x1b[31m  〢`,
+          `\x1b[33m ${moment(Date.now()).format("LT")}`,
           `\x1b[34m ${interaction.user.username}`,
-          `\x1b[31m ENTERED INCORRECT PASSWORD`
+          `\x1b[31m ENTERED INCORRECT PASSWORD`,
         );
         return await interaction.update({
           embeds: [
@@ -135,7 +162,7 @@ module.exports = async (client, config) => {
           ephemeral: true,
           components: [],
         });
-      };
+      }
     }
   });
 };
