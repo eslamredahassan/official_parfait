@@ -2,7 +2,6 @@ const moment = require("moment");
 require("moment-duration-format");
 
 module.exports = {
-
   ///---| Discor Members IDs |---///
   egy: `<@!123788535324082178>`,
   candy: `<@!612963985964269568>`,
@@ -16,11 +15,11 @@ module.exports = {
 
   parfaitDevbot: `<@!1074966121993744425>`,
   parfaitOfficialbot: `1080534483356364841`,
-  
-}
+};
 console.log(
+  `\x1b[0m`,
   `\x1b[31m 〢`,
-  `\x1b[30m ${moment(Date.now()).format("LT")}`,
+  `\x1b[33m ${moment(Date.now()).format("LT")}`,
   `\x1b[31m Mebmers IDs File`,
-  `\x1b[32m LOADED`
+  `\x1b[32m LOADED`,
 );

@@ -3,7 +3,6 @@ const moment = require("moment");
 require("moment-duration-format");
 
 module.exports = {
-
   ///---| Cooldown responses |---///
   wait: `Wait a little bit before asking me to do this again ${emojis.annoyed}`,
   lazy: `I'm lazy now ask me later ${emojis.dead}`,
@@ -23,7 +22,7 @@ module.exports = {
   live: `Hi I'm Alive`,
   hello: `Hello There`,
   //--------------------------------------//,
-  
+
   ///---| Answer No responses |---///
   wdyt: `${emojis.threadMark} What do you think, am I gonna let you apply without reading the requirements?`,
 
@@ -39,12 +38,13 @@ module.exports = {
   dnd: `don't disturb me`,
   lost: `Are you lost baby girl?`,
   hi: `Hi Dude, I can't talk now`,
-  ntfc: `I'm working now, no time for chat`
+  ntfc: `I'm working now, no time for chat`,
   //--------------------------------------//,
-}
+};
 console.log(
+  `\x1b[0m`,
   `\x1b[31m 〢`,
-  `\x1b[30m ${moment(Date.now()).format("LT")}`,
+  `\x1b[33m ${moment(Date.now()).format("LT")}`,
   `\x1b[31m Responses File`,
-  `\x1b[32m LOADED`
+  `\x1b[32m LOADED`,
 );

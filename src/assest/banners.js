@@ -2,12 +2,11 @@ const moment = require("moment");
 require("moment-duration-format");
 
 module.exports = {
-
   ///---| Main UI Banners |---///
   closeBanner: `https://i.imgur.com/8rfW6TT.png`,
   openBanner: `https://i.imgur.com/sH4bSVG.png`,
   maintenance: `https://i.imgur.com/PH1kyqf.png`,
-  maintenanceIcon:`https://i.imgur.com/mwZ3A1C.png`,
+  maintenanceIcon: `https://i.imgur.com/mwZ3A1C.png`,
   stepTwoBanner: `https://i.imgur.com/q7gjarW.png`,
   //--------------------------------------//,
 
@@ -23,24 +22,24 @@ module.exports = {
   leadersBanner: `https://i.imgur.com/hyIFRex.png`,
   partnerBanner: `https://i.imgur.com/YTT00Jj.png`,
   //--------------------------------------//,
-  
+
   ///---| About Parfait UI Banners |---///
   aboutBanner: `https://i.imgur.com/2kZkKWb.png`,
   //--------------------------------------//,
-  
+
   ///---| Setup Panel UI Banners |---///
   setupBanner: `https://i.imgur.com/jjlALDu.png`,
   //--------------------------------------//,
 
   reportBugBanner: "https://i.imgur.com/eSN83Gy.png",
   channelBugBanner: "https://i.imgur.com/loDY8qs.png",
-  
+
   newMessageBanner: "https://i.imgur.com/inpdCPD.png",
   channelMessageBanner: "https://i.imgur.com/t3jYexY.png",
-  
+
   requirementsBanner: `https://i.imgur.com/rJzHu30.png`,
   appSentbanner: `https://i.imgur.com/ZcGFHCz.png`,
-  
+
   acceptBanner: `https://i.imgur.com/EHfY3HX.png`,
   acceptFinishbanner: `https://i.imgur.com/VTpVwzj.png`,
   rejectBanner: `https://i.imgur.com/by7QTrf.png`,
@@ -50,10 +49,10 @@ module.exports = {
   promoteBanner: `https://i.imgur.com/AIEA2Ox.png`,
   bannedBanner: `https://i.imgur.com/doawQJm.png`,
   apologizeBanner: `https://i.imgur.com/pW8qS96.png`,
-  dmApologizeBanner:`https://i.imgur.com/f3UhhWO.png`,
+  dmApologizeBanner: `https://i.imgur.com/f3UhhWO.png`,
   FinishpromoteBanner: `https://i.imgur.com/cFj7jMJ.png`,
   appResultBanner: `https://i.imgur.com/EkDxKUJ.png`,
-  
+
   ///---| Images-Icons |---///
   sunLogo: `https://i.imgur.com/Ly7vC7l.png`,
   acceptIcon: `https://i.imgur.com/1g9HuNs.png`,
@@ -66,11 +65,12 @@ module.exports = {
   importantIcon: `https://i.imgur.com/89ZsrZx.png`,
   //--------------------------------------//,
   parfaitIcon: `https://i.imgur.com/NpNsiR1.png`,
-  footerIcon: `https://i.imgur.com/Ze74maV.png`
-}
+  footerIcon: `https://i.imgur.com/Ze74maV.png`,
+};
 console.log(
+  `\x1b[0m`,
   `\x1b[31m 〢`,
-  `\x1b[30m ${moment(Date.now()).format("LT")}`,
+  `\x1b[33m ${moment(Date.now()).format("LT")}`,
   `\x1b[31m Banners File`,
-  `\x1b[32m LOADED`
+  `\x1b[32m LOADED`,
 );

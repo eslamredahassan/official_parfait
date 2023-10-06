@@ -4,7 +4,6 @@ require("moment-duration-format");
 const members = require("../assest/members");
 
 module.exports = {
-
   ///---| Main UI Fields Text |---///
   rank: `${emojis.diamond} Rank Diamond+${emojis.required}`,
 
@@ -81,19 +80,20 @@ module.exports = {
   chooseStaff: `- No you can't.`,
   feedbackAppProcess: `- Yes you can, in your tryout thread or dm staff member.`,
   feedbackParfait: `- You can send it in your tryout thread\n - Or dm ${members.egy} directly.`,
-//--------------------------------------//,
-  
+  //--------------------------------------//,
+
   //---| About Menu Fields |---///
   aboutSun: `**SUN™&Co Smash Legends the Smash Legends community**,\nCreated in <t:1630858460:F>\nWe always strive to be the best and win more tournaments also, we organize tournaments for smash legends`,
-  hallOfFame:  `### Tournaments we achieved \n- CCL Tournaments\n - [**2nd** Season #1](https://discord.com/channels/986899741965185054/1002652439733874708/1003994107447877682) ${emojis.whiteDot} <t:1644271200:D>\n - [**3rd** Season #4](https://discord.com/channels/884109207052365924/884196552829202432/1036643661313744976) ${emojis.whiteDot} <t:1667167200:D>\n - [**1st** Season #7](https://discord.com/channels/884109207052365924/884196552829202432/1094250818762444832) ${emojis.whiteDot} <t:1680818400:D>\n### Other achievements\n- A visit of 5minlab studios in Seoul including playing with the big boss and peting the real Master Cat [𝗩isit-at-5minlab](https://discord.gg/XvT5uhfsFw).\n- <@!921695937259245579> invited in [Smash Legends](https://discord.gg/smashlegends) official server to make the search of teammates easier.\n- Organize big tournaments including [SUN&CO](https://discord.gg/ymGenWPwTv) Clan Wars with 300€ of prizepool and 5minlab rewards.\n- <@612963985964269568> become a moderator in [Smash Legends](https://discord.gg/smashlegends) official discord server.`,
-staffMembers: `- ${members.kd} - <@&966500457365274726>\n - Joined in: <t:1670018400:D>\n- ${members.egy} - <@&968409999523053630>\n - Joined in: <t:1672432980:D>\n- ${members.sasso} - <@&1090758953937408060>\n - Joined in: <t:1659564000:D>\n- ${members.yoshi} - <@&1074406541907726447>\n - Joined in: <t:1642543200:D>\n- ${members.ofak} - <@&1132362187869008013>\n - Joined in: <t:1671746400:D>`,
+  hallOfFame: `### Tournaments we achieved \n- CCL Tournaments\n - [**2nd** Season #1](https://discord.com/channels/986899741965185054/1002652439733874708/1003994107447877682) ${emojis.whiteDot} <t:1644271200:D>\n - [**3rd** Season #4](https://discord.com/channels/884109207052365924/884196552829202432/1036643661313744976) ${emojis.whiteDot} <t:1667167200:D>\n - [**1st** Season #7](https://discord.com/channels/884109207052365924/884196552829202432/1094250818762444832) ${emojis.whiteDot} <t:1680818400:D>\n### Other achievements\n- A visit of 5minlab studios in Seoul including playing with the big boss and peting the real Master Cat [𝗩isit-at-5minlab](https://discord.gg/XvT5uhfsFw).\n- <@!921695937259245579> invited in [Smash Legends](https://discord.gg/smashlegends) official server to make the search of teammates easier.\n- Organize big tournaments including [SUN&CO](https://discord.gg/ymGenWPwTv) Clan Wars with 300€ of prizepool and 5minlab rewards.\n- <@612963985964269568> become a moderator in [Smash Legends](https://discord.gg/smashlegends) official discord server.`,
+  staffMembers: `- ${members.kd} - <@&966500457365274726>\n - Joined in: <t:1670018400:D>\n- ${members.egy} - <@&968409999523053630>\n - Joined in: <t:1672432980:D>\n- ${members.sasso} - <@&1090758953937408060>\n - Joined in: <t:1659564000:D>\n- ${members.yoshi} - <@&1074406541907726447>\n - Joined in: <t:1642543200:D>\n- ${members.ofak} - <@&1132362187869008013>\n - Joined in: <t:1671746400:D>`,
   leaders: `- ${members.candy} **The Owner**\n- ${members.satanas} **Smash Legends Clan Leader**\n- ${members.bigby} <@&966500457365274726>`,
   partners: `**[[NØT] Notorious](https://discord.gg/3mb9h5qVN6)**`,
   //--------------------------------------//,
-}
+};
 console.log(
+  `\x1b[0m`,
   `\x1b[31m 〢`,
-  `\x1b[30m ${moment(Date.now()).format("LT")}`,
+  `\x1b[33m ${moment(Date.now()).format("LT")}`,
   `\x1b[31m Fields File`,
-  `\x1b[32m LOADED`
+  `\x1b[32m LOADED`,
 );
