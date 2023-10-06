@@ -11,7 +11,6 @@ const cooldown = new Set();
 require("moment-duration-format");
 
 module.exports = async (client, config) => {
-
   let guild = client.guilds.cache.get(config.guildID);
 
   client.on("interactionCreate", async (interaction) => {
@@ -19,19 +18,22 @@ module.exports = async (client, config) => {
       switch (interaction.customId) {
         case "#ap_accept":
           {
-            const perms = [`${config.devRole}`, `${config.STAFF}`]
+            const perms = [`${config.devRole}`, `${config.STAFF}`];
             let staff = guild.members.cache.get(interaction.user.id);
             if (staff.roles.cache.hasAny(...perms)) {
-
               const ID = interaction.message.embeds[0].footer.text;
               const ap_user = await interaction.guild.members.fetch(ID);
 
               const smashCode = await interaction.message.embeds[0].fields.find(
-                f => f.name === `${emojis.id} Smash Code`
+                (f) => f.name === `${emojis.id} Smash Code`,
               ).value;
 
-              const recruitmentChannel = interaction.guild.channels.cache.get(config.recruitmentChannel);
-              const announces = interaction.guild.channels.cache.get(config.announcesChannel);
+              const recruitmentChannel = interaction.guild.channels.cache.get(
+                config.recruitmentChannel,
+              );
+              const announces = interaction.guild.channels.cache.get(
+                config.announcesChannel,
+              );
 
               let promote = new MessageActionRow().addComponents([
                 new MessageButton()
@@ -67,10 +69,10 @@ module.exports = async (client, config) => {
               });
 
               console.log(
-                `\x1b[33m 〢`,
-                `\x1b[30m${moment(Date.now()).format("lll")}`,
+                `\x1b[33m  〢`,
+                `\x1b[30m ${moment(Date.now()).format("lll")}`,
                 `\x1b[34m ${ap_user.user.username}`,
-                `\x1b[32m ACCEPTED BY ${interaction.user.username}`
+                `\x1b[32m ACCEPTED BY ${interaction.user.username}`,
               );
 
               await ap_user.send({
@@ -107,8 +109,9 @@ module.exports = async (client, config) => {
                   ],
                   //this is the important part
                   ephemeral: true,
-                }).catch((err) => console.log('Error Line 115'));
-              
+                })
+                .catch((err) => console.log("Error Line 115"));
+
               const log = interaction.guild.channels.cache.get(config.log);
               await log.send({
                 embeds: [
@@ -118,7 +121,7 @@ module.exports = async (client, config) => {
                     color: color.gray,
                     timestamp: new Date(),
                     footer: {
-                      text: 'Accepted in',
+                      text: "Accepted in",
                       icon_url: banners.parfaitIcon,
                     },
                   },
@@ -127,33 +130,31 @@ module.exports = async (client, config) => {
                 ephemeral: false,
               });
               //// Interactions roles ///
-              await ap_user.roles.add(config.SunTest).catch(() => console.log('Error Line 2159'));
+              await ap_user.roles
+                .add([config.SunTest, config.SquadSUN])
+                .catch(() => console.log("Error Line 2159"));
               console.log(
-                `\x1b[33m 🛠`,
-                `\x1b[30m ${moment(Date.now()).format("lll")}`,
-                `\x1b[33m SunTest role ADDED`
+                `\x1b[33m  🛠`,
+                `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                `\x1b[33m Sun Roles ADDED`,
               );
-              await ap_user.roles.add(config.SquadSUN).catch(() => console.log('Error Line 2165'));
+              await ap_user.roles
+                .remove(config.waitRole)
+                .catch(() => console.log("Error Line 2171"));
               console.log(
-                `\x1b[33m 🛠`,
-                `\x1b[30m ${moment(Date.now()).format("lll")}`,
-                `\x1b[33m SquadSUN role ADDED`
-              );
-              await ap_user.roles.remove(config.waitRole).catch(() => console.log('Error Line 2171'));
-              console.log(
-                `\x1b[36m 🛠`,
-                `\x1b[30m ${moment(Date.now()).format("lll")}`,
-                `\x1b[33m Waitlist role REMOVED`
+                `\x1b[36m  🛠`,
+                `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                `\x1b[33m Waitlist role REMOVED`,
               );
 
               const msg_one = await recruitmentChannel.send(
-                `<:SPice:1080958776351399976> Welcome ${ap_user} in **SUN** :partying_face:`
+                `<:SPice:1080958776351399976> Welcome ${ap_user} in **SUN** :partying_face:`,
               );
               const msg_two = await announces.send(
-                `${emojis.pinkDot} Welcome ${ap_user} in **SUN** <@&${config.SquadSUN}> :partying_face:\n${smashCode}`
+                `${emojis.pinkDot} Welcome ${ap_user} in **SUN** <@&${config.SquadSUN}> :partying_face:\n${smashCode}`,
               );
 
-              var Emojis = [emojis.s_parfait, emojis.f_parfait,]
+              var Emojis = [emojis.s_parfait, emojis.f_parfait];
               for (var i = 0; i < Emojis.length; i++) {
                 var React = Emojis[i];
 
@@ -165,20 +166,22 @@ module.exports = async (client, config) => {
                     `\x1b[31m 〢`,
                     `\x1b[30m ${moment(Date.now()).format("lll")}`,
                     `\x1b[34m${interaction.user.username} Error`,
-                    `\x1b[35m Sending emojis!`
+                    `\x1b[35m Sending emojis!`,
                   );
                   throw err;
-                };
-              };
+                }
+              }
 
-              let applyChannel = interaction.guild.channels.cache.get(config.applyChannel);
+              let applyChannel = interaction.guild.channels.cache.get(
+                config.applyChannel,
+              );
               if (!applyChannel) return;
 
               const user = ap_user.user;
               const userName = user.username;
 
               const threadName = applyChannel.threads.cache.find(
-                (x) => x.name === `${"🧤︱" + userName + " Tryout"}`
+                (x) => x.name === `${"🧤︱" + userName + " Tryout"}`,
               );
               /// Rename The Thread ///
               await threadName.setName("🧤︱" + `${userName}` + " Accepted");
@@ -188,7 +191,6 @@ module.exports = async (client, config) => {
               /// Archive the thread ///
               await wait(8000); // ** cooldown 10 seconds ** \\
               await threadName.setArchived(true);
-
             } else {
               await interaction
                 .reply({
@@ -202,11 +204,11 @@ module.exports = async (client, config) => {
                   //this is the important part
                   ephemeral: true,
                 })
-                .catch(() => console.log('Error Line 2209'));
+                .catch(() => console.log("Error Line 2209"));
               console.log(
                 `\x1b[31m 🛠`,
                 `\x1b[30m ${moment(Date.now()).format("lll")}`,
-                `\x1b[33m Permission denied`
+                `\x1b[33m Permission denied`,
               );
             }
           }

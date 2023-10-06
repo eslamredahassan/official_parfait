@@ -1,12 +1,10 @@
 const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
+
 const fieldsText = require("../assest/fieldsText.js");
 const banners = require("../assest/banners.js");
 const color = require("../assest/color.js");
 const emojis = require("../assest/emojis");
 const moment = require("moment");
-const wait = require("util").promisify(setTimeout);
-const cooldown = new Set();
-require("moment-duration-format");
 
 module.exports = async (client, config) => {
 
@@ -25,13 +23,13 @@ module.exports = async (client, config) => {
                 .setLabel("Become a Sun Legend")
                 .setEmoji(emojis.apply),
             ]);
-            
-            console.log(
-              `\x1b[31m 〢`,
-              `\x1b[30m ${moment(Date.now()).format("lll")}`,
-              `\x1b[34m${interaction.user.username} Answered`,
-              `\x1b[35m Yes for Requirements`
-            );
+
+          console.log(
+            `\x1b[31m  〢`,
+            `\x1b[33m ${moment(Date.now()).format("lll")}`,
+            `\x1b[34m ${interaction.user.username} Answered`,
+            `\x1b[35m Yes for Requirements`,
+          );
 
             return await interaction.update({
               embeds: [

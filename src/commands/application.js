@@ -1,5 +1,16 @@
-const { MessageActionRow, MessageButton, MessageEmbed, Modal, TextInputComponent } = require("discord.js");
-const messages = require("../assest/messages.js");
+const {
+  MessageActionRow,
+  MessageButton,
+  MessageEmbed,
+  Modal,
+  TextInputComponent,
+} = require("discord.js");
+
+const moment = require("moment");
+const wait = require("util").promisify(setTimeout);
+const cooldown = new Set();
+require("moment-duration-format");
+
 const responses = require("../assest/responses.js");
 const interface = require("../assest/interface.js");
 const fieldsText = require("../assest/fieldsText.js");
@@ -7,38 +18,48 @@ const banners = require("../assest/banners.js");
 const errors = require("../assest/errors.js");
 const color = require("../assest/color.js");
 const emojis = require("../assest/emojis");
-const moment = require("moment");
-const wait = require("util").promisify(setTimeout);
-const cooldown = new Set();
-require("moment-duration-format");
 
 module.exports = async (client, config) => {
-
   let guild = client.guilds.cache.get(config.guildID);
+  let Logo = guild.iconURL({ dynamic: true });
 
   client.on("interactionCreate", async (interaction) => {
     if (interaction.isCommand()) {
       switch (interaction.commandName) {
         case "setup":
           {
-            const cooldownResponse = [`${responses.lazy}`, `${responses.know}`, `${responses.busy}`, `${responses.wait}`]
-            const cooldownResponseMessages = cooldownResponse[Math.floor(Math.random() * cooldownResponse.length)];
+            console.log(
+              `\x1b[31m  〢`,
+              `\x1b[33m ${moment(Date.now()).format("lll")}`,
+              `\x1b[34m ${interaction.user.username} USED`,
+              `\x1b[35m Setup Command`,
+            );
+            const cooldownResponse = [
+              `${responses.lazy}`,
+              `${responses.know}`,
+              `${responses.busy}`,
+              `${responses.wait}`,
+            ];
+            const cooldownResponseMessages =
+              cooldownResponse[
+                Math.floor(Math.random() * cooldownResponse.length)
+              ];
 
             if (cooldown.has(interaction.user.id)) {
               interaction.reply({
                 embeds: [
                   {
                     title: `${emojis.cooldown} Cooldown`,
-                    description: `${emojis.whiteDot} Hi  <@${interaction.user.id}>` + ` ${cooldownResponseMessages}`,
-                    color: color.gray,
+                    description:
+                      `${emojis.whiteDot} Hi  <@${interaction.user.id}>` +
+                      ` ${cooldownResponseMessages}`,
+                    color: `${color.gray}`,
                   },
                 ],
                 //this is the important part
                 ephemeral: true,
               });
-
             } else {
-
               const btnui = new MessageActionRow().addComponents([
                 new MessageButton()
                   .setStyle(2)
@@ -60,10 +81,9 @@ module.exports = async (client, config) => {
                   .setEmoji(emojis.dev),
               ]);
 
-              const perms = [`${config.devRole}`, `${config.devRoleTest}`]
+              const perms = [`${config.devRole}`, `${config.STAFF}`];
               let staff = guild.members.cache.get(interaction.user.id);
               if (staff.roles.cache.hasAny(...perms)) {
-
                 await interaction.reply({
                   embeds: [
                     {
@@ -113,7 +133,7 @@ module.exports = async (client, config) => {
                     //this is the important part
                     ephemeral: true,
                   })
-                  .catch(() => console.log('Error Line 118'));
+                  .catch(() => console.log("Error Line 118"));
               }
               cooldown.add(interaction.user.id);
               setTimeout(() => {
@@ -123,20 +143,82 @@ module.exports = async (client, config) => {
             }
           }
           break;
+        case "status":
+          {
+            console.log(
+              `\x1b[31m  〢`,
+              `\x1b[33m ${moment(Date.now()).format("lll")}`,
+              `\x1b[34m ${interaction.user.username} USED`,
+              `\x1b[35m Parfait Status Command`,
+            );
+
+            function uptimeString(seconds) {
+              let days = Math.floor(seconds / (3600 * 24));
+              seconds -= days * 3600 * 24;
+              let hours = Math.floor(seconds / 3600);
+              seconds -= hours * 3600;
+              let minutes = Math.floor(seconds / 60);
+              seconds -= minutes * 60;
+              return `\`\`${days}\`\` Days, \`\`${hours}\`\` Hours, \`\`${minutes}\`\` Minutes, and \`\`${seconds}\`\` seconds`;
+            }
+
+            await interaction.reply({
+              embeds: [
+                new MessageEmbed()
+                  .setColor(color.gray)
+                  .setTitle(`${emojis.alert} ${client.user.tag} status`)
+                  .setDescription("")
+                  //.setThumbnail(Logo)
+                  .setImage(banners.aboutBanner)
+                  .addFields({
+                    name: `${emojis.time} Uptime`,
+                    value: `${emojis.threadMark} ${uptimeString(
+                      Math.floor(process.uptime()),
+                    )}`,
+                    inline: false,
+                  })
+                  .setFooter({
+                    ///text: `This is for Staff members only, no one else can see it`,
+                    text: `Parfait - Advanced Discord Application Bot`,
+                    iconURL: banners.parfaitIcon,
+                  }),
+              ],
+              ephemeral: true,
+              components: [],
+            });
+          }
+          break;
         case "ping":
           {
-            const pingResponses = [`${responses.peekapoo}`, `${responses.live}`, `${responses.hello}`]
-            const randomPingMessage = pingResponses[Math.floor(Math.random() * pingResponses.length)];
+            console.log(
+              `\x1b[31m  〢`,
+              `\x1b[33m ${moment(Date.now()).format("lll")}`,
+              `\x1b[34m ${interaction.user.username} USED`,
+              `\x1b[35m Ping Command`,
+            );
 
-            interaction.reply({
-              //content: `pong :: ${client.ws.ping}`,
-              content: `${randomPingMessage}`,
+            const sent = await interaction.reply({
+              content: "thinking...",
+              fetchReply: true,
+              ephemeral: true,
+            });
+            await wait(3000);
+            interaction.editReply({
+              content: `My latency: ${
+                sent.createdTimestamp - interaction.createdTimestamp
+              }ms`,
               ephemeral: true,
             });
           }
           break;
         case "report_bug":
           {
+            console.log(
+              `\x1b[31m  〢`,
+              `\x1b[33m ${moment(Date.now()).format("lll")}`,
+              `\x1b[34m ${interaction.user.username} USED`,
+              `\x1b[35m Report Bug Command`,
+            );
             //// Modal application code ///
             let report_modal = new Modal()
               .setTitle(`🐞 Report bug`)
@@ -163,11 +245,16 @@ module.exports = async (client, config) => {
             let row_details = new MessageActionRow().addComponents(details);
             report_modal.addComponents(row_where, row_details);
             await interaction.showModal(report_modal);
-
           }
           break;
         case "message_the_developer":
           {
+            console.log(
+              `\x1b[31m  〢`,
+              `\x1b[33m ${moment(Date.now()).format("lll")}`,
+              `\x1b[34m ${interaction.user.username} USED`,
+              `\x1b[35m Message Dev Command`,
+            );
             //// Modal application code ///
             let sendToDev_modal = new Modal()
               .setTitle(`📧 Send a message to the developer`)
@@ -179,17 +266,33 @@ module.exports = async (client, config) => {
               .setMinLength(1)
               .setMaxLength(365)
               .setRequired(true)
-              .setPlaceholder(`Type your message here `)
+              .setPlaceholder(`Type your message here`)
               .setStyle(2);
 
             let row_usermessage = new MessageActionRow().addComponents(message);
             sendToDev_modal.addComponents(row_usermessage);
             await interaction.showModal(sendToDev_modal);
-
           }
           break;
         case "about":
           {
+            console.log(
+              `\x1b[31m  〢`,
+              `\x1b[33m ${moment(Date.now()).format("lll")}`,
+              `\x1b[34m ${interaction.user.username} USED`,
+              `\x1b[35m About Command`,
+            );
+
+            function uptimeString(seconds) {
+              let days = Math.floor(seconds / (3600 * 24));
+              seconds -= days * 3600 * 24;
+              let hours = Math.floor(seconds / 3600);
+              seconds -= hours * 3600;
+              let minutes = Math.floor(seconds / 60);
+              seconds -= minutes * 60;
+              return `\`\`${days}\`\` Days, \`\`${hours}\`\` Hours, \`\`${minutes}\`\` Minutes, and \`\`${seconds}\`\` seconds`;
+            }
+
             const aboutParfait = new MessageActionRow().addComponents([
               new MessageButton()
                 .setStyle("LINK")
@@ -209,13 +312,13 @@ module.exports = async (client, config) => {
                   .setColor(color.gray)
                   .setTitle(`${emojis.alert} About ${client.user.tag}`)
                   .setDescription(interface.aboutMessage)
-                  .setThumbnail(`https://i.imgur.com/Ly7vC7l.png`)
+                  .setThumbnail(Logo)
                   .setImage(banners.aboutBanner)
                   .addFields(
                     {
                       name: `${emojis.developer} Programmed by`,
                       value: fieldsText.programed,
-                      inline: true
+                      inline: true,
                     },
                     {
                       name: `${emojis.build} Build`,
@@ -225,6 +328,13 @@ module.exports = async (client, config) => {
                     {
                       name: `${emojis.version} Version`,
                       value: fieldsText.version,
+                      inline: true,
+                    },
+                    {
+                      name: `${emojis.time} Uptime`,
+                      value: `${emojis.threadMark} ${uptimeString(
+                        Math.floor(process.uptime()),
+                      )}`,
                       inline: true,
                     },
                     {
@@ -245,7 +355,6 @@ module.exports = async (client, config) => {
           }
           client.on("interactionCreate", async (interaction) => {
             if (interaction.isSelectMenu()) {
-
               let choice = interaction.values[0];
               if (choice == "A") {
                 const b1 = new MessageActionRow().addComponents([
@@ -261,7 +370,6 @@ module.exports = async (client, config) => {
                   ephemeral: true,
                   components: [b1],
                 });
-
               } else if (choice == "B") {
                 const b2 = new MessageActionRow().addComponents([
                   new MessageButton()
@@ -288,7 +396,7 @@ module.exports = async (client, config) => {
           break;
       }
     }
-    if (interaction.customId === 'report_modal') {
+    if (interaction.customId === "report_modal") {
       let where = interaction.fields.getTextInputValue("bug_where");
       let details = interaction.fields.getTextInputValue("bug_details");
 
@@ -324,7 +432,9 @@ module.exports = async (client, config) => {
               },
               {
                 name: `${emojis.time} Reported Since`,
-                value: `${emojis.threadMark} <t:${Math.floor(Date.now() / 1000)}:R>`,
+                value: `${emojis.threadMark} <t:${Math.floor(
+                  Date.now() / 1000,
+                )}:R>`,
                 inline: true,
               },
               {
@@ -362,7 +472,7 @@ module.exports = async (client, config) => {
         components: [],
       });
     }
-    if (interaction.customId === 'sendToDev_modal') {
+    if (interaction.customId === "sendToDev_modal") {
       let message = interaction.fields.getTextInputValue("user_message");
 
       let dmDevChannel = client.channels.cache.get(config.dmDevChannel);
@@ -393,7 +503,9 @@ module.exports = async (client, config) => {
               },
               {
                 name: `${emojis.time} Sent Since`,
-                value: `${emojis.threadMark} <t:${Math.floor(Date.now() / 1000)}:R>`,
+                value: `${emojis.threadMark} <t:${Math.floor(
+                  Date.now() / 1000,
+                )}:R>`,
                 inline: true,
               },
               {
@@ -401,7 +513,7 @@ module.exports = async (client, config) => {
                 value: `${emojis.threadMark} ${message}`,
                 inline: false,
               },
-              )
+            )
             .setTimestamp()
             .setFooter({
               text: interaction.user.id,
@@ -411,7 +523,7 @@ module.exports = async (client, config) => {
         components: [reply],
       });
 
-      return await interaction.reply({
+      await interaction.reply({
         embeds: [
           {
             title: `${emojis.check} Your message sent has been sent to my developer`,

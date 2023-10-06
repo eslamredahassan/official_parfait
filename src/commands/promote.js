@@ -1,63 +1,69 @@
 const { MessageEmbed } = require("discord.js");
+
+const moment = require("moment");
+
 const messages = require("../assest/messages.js");
 const banners = require("../assest/banners.js");
 const errors = require("../assest/errors.js");
 const color = require("../assest/color.js");
 const emojis = require("../assest/emojis");
-const moment = require("moment");
-const wait = require("util").promisify(setTimeout);
-const cooldown = new Set();
-require("moment-duration-format");
 
 module.exports = async (client, config) => {
-
   let guild = client.guilds.cache.get(config.guildID);
+  let Logo = guild.iconURL({ dynamic: true });
 
   client.on("interactionCreate", async (interaction) => {
     if (interaction.isButton()) {
       switch (interaction.customId) {
         case "#ap_promote":
           {
-            const perms = [`${config.devRole}`, `${config.STAFF}`]
+            const perms = [`${config.devRole}`, `${config.STAFF}`];
             let staff = guild.members.cache.get(interaction.user.id);
             if (staff.roles.cache.hasAny(...perms)) {
-
               const ID = interaction.message.embeds[0].footer.text;
               const ap_user = await interaction.guild.members.fetch(ID);
-              const announces = interaction.guild.channels.cache.get(config.announcesChannel);
+              const announces = interaction.guild.channels.cache.get(
+                config.announcesChannel,
+              );
 
               await announces.send(
-                `Say Congratulations to ${ap_user} he is now officially in <@&${config.TeamSun}> :partying_face:`
+                `Say Congratulations to ${ap_user} he is now officially in <@&${config.TeamSun}> :partying_face:`,
               );
 
               let embed = new MessageEmbed(interaction.message.embeds[0])
-                .setTitle(`${emojis.alert} Promoted by ${interaction.user.username}`)
+                .setTitle(
+                  `${emojis.alert} Promoted by ${interaction.user.username}`,
+                )
                 .setColor(color.gray)
                 .setImage(banners.FinishpromoteBanner)
                 .setThumbnail(banners.FinishpromoteIcon)
                 .setTimestamp();
 
-              await interaction.message.edit({
-                embeds: [embed],
-                components: [],
-              }).then((msg) => msg.unpin());
+              await interaction.message
+                .edit({
+                  embeds: [embed],
+                  components: [],
+                })
+                .then((msg) => msg.unpin());
 
               console.log(
-                `\x1b[33m 〢`,
-                `\x1b[30m${moment(Date.now()).format("lll")}`,
+                `\x1b[33m  〢`,
+                `\x1b[33m ${moment(Date.now()).format("lll")}`,
                 `\x1b[34m ${ap_user.user.username}`,
-                `\x1b[32m PROMOTED BY ${interaction.user.username}`
+                `\x1b[32m PROMOTED BY ${interaction.user.username}`,
               );
               //// Send message to accepted member ///
-              await ap_user.send({
-                embeds: [
-                  new MessageEmbed()
-                    .setColor(color.gray)
-                    .setTitle(`${emojis.s_parfait} Congratulations`)
-                    .setImage(banners.promoteBanner)
-                    .setDescription(messages.promoteMessage),
-                ],
-              }).catch(() => console.log('Error Line 2398'));
+              await ap_user
+                .send({
+                  embeds: [
+                    new MessageEmbed()
+                      .setColor(color.gray)
+                      .setTitle(`${emojis.s_parfait} Congratulations`)
+                      .setImage(banners.promoteBanner)
+                      .setDescription(messages.promoteMessage),
+                  ],
+                })
+                .catch(() => console.log("Error Line 2398"));
               //// Send message after accepting member ///
               await interaction
                 .reply({
@@ -70,7 +76,8 @@ module.exports = async (client, config) => {
                   ],
                   //this is the important part
                   ephemeral: true,
-                }).catch(() => console.log('Error Line 79'));
+                })
+                .catch(() => console.log("Error Line 79"));
               //// Send message to log channel after promoting member ///
               const log = interaction.guild.channels.cache.get(config.log);
               await log.send({
@@ -81,7 +88,7 @@ module.exports = async (client, config) => {
                     color: color.gray,
                     timestamp: new Date(),
                     footer: {
-                      text: 'Promoted in',
+                      text: "Promoted in",
                       icon_url: banners.parfaitIcon,
                     },
                   },
@@ -91,27 +98,31 @@ module.exports = async (client, config) => {
               });
               //// Interactions roles ///
               try {
-                await ap_user.roles.remove(config.SunTest).catch(() => console.log('Error Line 2414'));
+                await ap_user.roles
+                  .remove(config.SunTest)
+                  .catch(() => console.log("Error Line 2414"));
                 console.log(
-                  `\x1b[33m 🛠`,
-                  `\x1b[30m ${moment(Date.now()).format("lll")}`,
-                  `\x1b[33m SunTest role REMOVED`
+                  `\x1b[33m  🛠`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[33m SunTest role REMOVED`,
                 );
-                await ap_user.roles.add(config.TeamSun).catch(() => console.log('Error Line 2420'));
+                await ap_user.roles
+                  .add(config.TeamSun)
+                  .catch(() => console.log("Error Line 2420"));
                 console.log(
-                  `\x1b[33m 🛠`,
-                  `\x1b[30m ${moment(Date.now()).format("lll")}`,
-                  `\x1b[33m SquadSUN role ADDED`
+                  `\x1b[33m  🛠`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[33m SquadSUN role ADDED`,
                 );
               } catch (err) {
                 console.log(
-                  `\x1b[31m 〢`,
-                  `\x1b[30m ${moment(Date.now()).format("lll")}`,
-                  `\x1b[34m${ap_user.user.username} ROLES`,
-                  `\x1b[35m Unfounded!`
+                  `\x1b[31m  〢`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[34m ${ap_user.user.username} ROLES`,
+                  `\x1b[35m Unfounded!`,
                 );
                 throw err;
-              };
+              }
             } else {
               await interaction
                 .reply({
@@ -125,11 +136,11 @@ module.exports = async (client, config) => {
                   //this is the important part
                   ephemeral: true,
                 })
-                .catch(() => console.log('Error Line 2439'));
+                .catch(() => console.log("Error Line 2439"));
               console.log(
-                `\x1b[31m 🛠`,
-                `\x1b[30m ${moment(Date.now()).format("lll")}`,
-                `\x1b[33m Permission denied`
+                `\x1b[31m  🛠`,
+                `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                `\x1b[33m Permission denied`,
               );
             }
           }
