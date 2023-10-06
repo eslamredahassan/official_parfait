@@ -207,15 +207,17 @@ module.exports = async (client, config) => {
         case "ping":
           {
             const sent = await interaction.reply({
-              content: "Thinking...",
+              content: `${emojis.thinking} Thinking...`,
               fetchReply: true,
               ephemeral: true,
             });
             await wait(3000);
             interaction.editReply({
-              content: `🏓 Latency is: ${
+              content: `- Parfait Latency is \`\`${
                 sent.createdTimestamp - interaction.createdTimestamp
-              } ms`,
+              }\`\` ms and API Latency is \`\`${Math.round(
+                client.ws.ping,
+              )}\`\` ms`,
               ephemeral: true,
             });
             console.log(
@@ -226,7 +228,8 @@ module.exports = async (client, config) => {
               `\x1b[35m Ping Command`,
               `\x1b[36m ${
                 sent.createdTimestamp - interaction.createdTimestamp
-              } ms`,
+              } ms `,
+              `\x1b[35m ${Math.round(client.ws.ping)} ms`,
             );
           }
           break;
