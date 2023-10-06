@@ -14,17 +14,27 @@ module.exports = async (client, config) => {
       },
       {
         name: "report_bug",
-        description: `[Dev] Report a bug to the developer`,
+        description: `Report a bug to the developer`,
         type: "CHAT_INPUT",
       },
       {
         name: "message_the_developer",
-        description: `[Dev] Send a message to parfait developer`,
+        description: `Send a message to parfait developer`,
         type: "CHAT_INPUT",
       },
       {
         name: "about",
         description: `Learn more about Parfait bot`,
+        type: "CHAT_INPUT",
+      },
+      {
+        name: "status",
+        description: `Check Parfait Uptime`,
+        type: "CHAT_INPUT",
+      },
+      {
+        name: "ping",
+        description: `Check Parfait latency`,
         type: "CHAT_INPUT",
       },
     ]);
