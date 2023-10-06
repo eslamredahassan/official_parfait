@@ -1,17 +1,19 @@
 const { MessageSelectMenu, MessageActionRow } = require("discord.js");
-const messages = require("../assest/messages.js");
-const fieldsText = require("../assest/fieldsText.js");
-const banners = require("../assest/banners.js");
-const color = require("../assest/color.js");
-const emojis = require("../assest/emojis");
+
 const moment = require("moment");
 const wait = require("util").promisify(setTimeout);
 const cooldown = new Set();
 require("moment-duration-format");
 
-module.exports = async (client, config) => {
+const messages = require("../assest/messages.js");
+const fieldsText = require("../assest/fieldsText.js");
+const banners = require("../assest/banners.js");
+const color = require("../assest/color.js");
+const emojis = require("../assest/emojis");
 
+module.exports = async (client, config) => {
   let guild = client.guilds.cache.get(config.guildID);
+  let Logo = guild.iconURL({ dynamic: true });
 
   client.on("interactionCreate", async (interaction) => {
     if (interaction.isButton()) {
@@ -19,10 +21,10 @@ module.exports = async (client, config) => {
         case "#faq":
           {
             console.log(
-              `\x1b[31m 〢`,
-              `\x1b[30m ${moment(Date.now()).format("lll")}`,
-              `\x1b[34m${interaction.user.username} USED`,
-              `\x1b[35m FAQ Button`
+              `\x1b[31m  〢`,
+              `\x1b[33m ${moment(Date.now()).format("lll")}`,
+              `\x1b[34m ${interaction.user.username} USED`,
+              `\x1b[35m FAQ Button`,
             );
 
             const faqmenu = new MessageActionRow().addComponents(
@@ -55,7 +57,7 @@ module.exports = async (client, config) => {
                     value: "parfaitbot",
                     emoji: emojis.faq,
                   },
-                ])
+                ]),
             ); // End of .addComponents()
             await interaction.reply({
               embeds: [
@@ -92,7 +94,6 @@ module.exports = async (client, config) => {
             if (interaction.isSelectMenu()) {
               let choice = interaction.values[0];
               if (choice == "applying") {
-
                 const faqmenu = new MessageActionRow().addComponents(
                   new MessageSelectMenu()
                     .setCustomId("faq-menu")
@@ -124,8 +125,15 @@ module.exports = async (client, config) => {
                         value: "parfaitbot",
                         emoji: emojis.faq,
                       },
-                    ])
+                    ]),
                 ); // End of .addComponents()
+
+                console.log(
+                  `\x1b[31m  〢`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[34m ${interaction.user.username} WATCH`,
+                  `\x1b[35m Appyling Category`,
+                );
 
                 return await interaction.update({
                   embeds: [
@@ -209,8 +217,15 @@ module.exports = async (client, config) => {
                         value: "parfaitbot",
                         emoji: emojis.faq,
                       },
-                    ])
+                    ]),
                 ); // End of .addComponents()
+
+                console.log(
+                  `\x1b[31m  〢`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[34m ${interaction.user.username} WATCH`,
+                  `\x1b[35m Accepted Applications Category`,
+                );
 
                 return await interaction.update({
                   embeds: [
@@ -279,8 +294,16 @@ module.exports = async (client, config) => {
                         value: "parfaitbot",
                         emoji: emojis.faq,
                       },
-                    ])
+                    ]),
                 ); // End of .addComponents()
+
+                console.log(
+                  `\x1b[31m  〢`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[34m ${interaction.user.username} WATCH`,
+                  `\x1b[35m Rejected Applications Category`,
+                );
+
                 return await interaction.update({
                   embeds: [
                     {
@@ -343,8 +366,15 @@ module.exports = async (client, config) => {
                         value: "parfaitbot",
                         emoji: emojis.faq,
                       },
-                    ])
+                    ]),
                 ); // End of .addComponents()
+
+                console.log(
+                  `\x1b[31m  〢`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[34m ${interaction.user.username} WATCH`,
+                  `\x1b[35m Tryout Process Category`,
+                );
 
                 return await interaction.update({
                   embeds: [
@@ -423,8 +453,15 @@ module.exports = async (client, config) => {
                         default: true,
                         emoji: emojis.faq,
                       },
-                    ])
+                    ]),
                 ); // End of .addComponents()
+
+                console.log(
+                  `\x1b[31m  〢`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[34m ${interaction.user.username} WATCH`,
+                  `\x1b[35m Parfait Bot Category`,
+                );
 
                 return await interaction.update({
                   embeds: [

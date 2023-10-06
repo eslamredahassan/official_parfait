@@ -1,16 +1,22 @@
-const { MessageActionRow, MessageButton, MessageSelectMenu } = require("discord.js");
-const fieldsText = require("../assest/fieldsText.js");
-const banners = require("../assest/banners.js");
-const color = require("../assest/color.js");
-const emojis = require("../assest/emojis");
+const {
+  MessageActionRow,
+  MessageButton,
+  MessageSelectMenu,
+} = require("discord.js");
+
 const moment = require("moment");
 const wait = require("util").promisify(setTimeout);
 const cooldown = new Set();
 require("moment-duration-format");
 
-module.exports = async (client, config) => {
+const fieldsText = require("../assest/fieldsText.js");
+const banners = require("../assest/banners.js");
+const color = require("../assest/color.js");
+const emojis = require("../assest/emojis");
 
+module.exports = async (client, config) => {
   let guild = client.guilds.cache.get(config.guildID);
+  let Logo = guild.iconURL({ dynamic: true });
 
   client.on("interactionCreate", async (interaction) => {
     if (interaction.isButton()) {
@@ -18,10 +24,10 @@ module.exports = async (client, config) => {
         case "#about-menu":
           {
             console.log(
-              `\x1b[31m 〢`,
-              `\x1b[30m ${moment(Date.now()).format("lll")}`,
+              `\x1b[31m  〢`,
+              `\x1b[33m ${moment(Date.now()).format("lll")}`,
               `\x1b[34m${interaction.user.username} USED`,
-              `\x1b[35m About Button`
+              `\x1b[35m About Button`,
             );
 
             const aboutmenu = new MessageActionRow().addComponents(
@@ -54,7 +60,7 @@ module.exports = async (client, config) => {
                     value: "OP",
                     emoji: emojis.partner,
                   },
-                ])
+                ]),
             ); // End of .addComponents()
             await interaction.reply({
               embeds: [
@@ -84,15 +90,15 @@ module.exports = async (client, config) => {
           }
           client.on("interactionCreate", async (interaction) => {
             if (interaction.isSelectMenu()) {
-
               let choice = interaction.values[0];
               if (choice == "ASC") {
-
                 const controll = new MessageActionRow().addComponents([
                   new MessageButton()
                     .setStyle(5)
                     .setLabel(`Youtube`)
-                    .setURL(`https://www.youtube.com/channel/UCxtjE4pbP7O3RwKm5yyhltg`)
+                    .setURL(
+                      `https://www.youtube.com/channel/UCxtjE4pbP7O3RwKm5yyhltg`,
+                    )
                     .setEmoji(emojis.youtube),
                   new MessageButton()
                     .setStyle(5)
@@ -137,8 +143,15 @@ module.exports = async (client, config) => {
                         value: "OP",
                         emoji: emojis.partner,
                       },
-                    ])
+                    ]),
                 ); // End of .addComponents()
+
+                console.log(
+                  `\x1b[31m  〢`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[34m ${interaction.user.username} WATCH`,
+                  `\x1b[35m About Sun&CO Category`,
+                );
 
                 return await interaction.update({
                   embeds: [
@@ -185,8 +198,15 @@ module.exports = async (client, config) => {
                         value: "OP",
                         emoji: emojis.partner,
                       },
-                    ])
+                    ]),
                 ); // End of .addComponents()
+
+                console.log(
+                  `\x1b[31m  〢`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[34m ${interaction.user.username} WATCH`,
+                  `\x1b[35m Hall of fame Category`,
+                );
 
                 return await interaction.update({
                   embeds: [
@@ -233,8 +253,15 @@ module.exports = async (client, config) => {
                         value: "OP",
                         emoji: emojis.partner,
                       },
-                    ])
+                    ]),
                 ); // End of .addComponents()
+
+                console.log(
+                  `\x1b[31m  〢`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[34m ${interaction.user.username} WATCH`,
+                  `\x1b[35m Staff Members Category`,
+                );
                 return await interaction.update({
                   embeds: [
                     {
@@ -280,8 +307,15 @@ module.exports = async (client, config) => {
                         value: "OP",
                         emoji: emojis.partner,
                       },
-                    ])
+                    ]),
                 ); // End of .addComponents()
+
+                console.log(
+                  `\x1b[31m  〢`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[34m ${interaction.user.username} WATCH`,
+                  `\x1b[35m Leaders Category`,
+                );
 
                 return await interaction.update({
                   embeds: [
@@ -328,8 +362,15 @@ module.exports = async (client, config) => {
                         default: true,
                         emoji: emojis.partner,
                       },
-                    ])
+                    ]),
                 ); // End of .addComponents()
+
+                console.log(
+                  `\x1b[31m  〢`,
+                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                  `\x1b[34m ${interaction.user.username} WATCH`,
+                  `\x1b[35m Partners Category`,
+                );
 
                 return await interaction.update({
                   embeds: [
