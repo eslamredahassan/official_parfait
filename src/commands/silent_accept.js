@@ -58,7 +58,8 @@ module.exports = async (client, config) => {
               });
 
               console.log(
-                `\x1b[33m  〢`,
+                `\x1b[0m`,
+                `\x1b[33m 〢`,
                 `\x1b[33m ${moment(Date.now()).format("lll")}`,
                 `\x1b[34m ${ap_user.user.username}`,
                 `\x1b[32m ACCEPTED BY ${interaction.user.username}`,
@@ -96,22 +97,24 @@ module.exports = async (client, config) => {
                 ephemeral: false,
               });
               //// Interactions roles ///
-              await ap_user.roles
-                .add([config.SunTest, config.SquadSUN])
-                .catch(() => console.log("Error Line 2298"));
+              await ap_user.roles.add([config.SunTest, config.SquadSUN]);
               console.log(
-                `\x1b[33m  🛠`,
+                `\x1b[0m`,
+                `\x1b[31m 🛠`,
                 `\x1b[33m ${moment(Date.now()).format("lll")}`,
-                `\x1b[33m Sun Roles ADDED`,
+                `\x1b[35m Sun Roles`,
+                `\x1b[32m ADDED`,
               );
 
               await ap_user.roles
                 .remove(config.waitRole)
                 .catch(() => console.log("Error Line 2312"));
               console.log(
-                `\x1b[36m  🛠`,
+                `\x1b[0m`,
+                `\x1b[31m 🛠`,
                 `\x1b[33m ${moment(Date.now()).format("lll")}`,
-                `\x1b[33m Waitlist role REMOVED`,
+                `\x1b[35m Wannabe Role`,
+                `\x1b[32m REMOVED`,
               );
 
               let applyChannel = interaction.guild.channels.cache.get(
@@ -148,7 +151,8 @@ module.exports = async (client, config) => {
                 })
                 .catch(() => console.log("Error Line 2350"));
               console.log(
-                `\x1b[31m  🛠`,
+                `\x1b[0m`,
+                `\x1b[31m 🛠`,
                 `\x1b[33m ${moment(Date.now()).format("lll")}`,
                 `\x1b[33m Permission denied`,
               );

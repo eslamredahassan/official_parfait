@@ -421,7 +421,7 @@ module.exports = async (client, config) => {
 
         console.log(
           `\x1b[0m`,
-          `\x1b[31m  〢`,
+          `\x1b[31m 〢`,
           `\x1b[33m ${moment(Date.now()).format("lll")}`,
           `\x1b[34m Created thread for`,
           `\x1b[35m ${thread.name}`,
@@ -437,7 +437,7 @@ module.exports = async (client, config) => {
         .catch(() => console.log("Error Line 3478"));
       console.log(
         `\x1b[0m`,
-        `\x1b[31m  🛠`,
+        `\x1b[31m 🛠`,
         `\x1b[33m ${moment(Date.now()).format("lll")}`,
         `\x1b[34m Sun wannabe role added to`,
         `\x1b[34m ${interaction.user.username}`,
