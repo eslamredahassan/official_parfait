@@ -18,7 +18,7 @@ module.exports = async (client, config) => {
         case "#silent_reject":
           {
             //// Check the permissions ///
-            const perms = [`${config.devRole}`, `${config.devRoleTest}`];
+            const perms = [`${config.devRole}`, `${config.STAFF}`];
             let staff = guild.members.cache.get(interaction.user.id);
             if (staff.roles.cache.hasAny(...perms)) {
               let embed = new MessageEmbed(interaction.message.embeds[0])
@@ -75,13 +75,12 @@ module.exports = async (client, config) => {
               await ap_user.roles
                 .remove(config.waitRole)
                 .catch(() => console.log("Error Line 77"));
-                console.log(
-                  `\x1b[0m`,
-                  `\x1b[31m 🛠`,
-                  `\x1b[33m ${moment(Date.now()).format("lll")}`,
-                  `\x1b[35m Sun wannabe role`,
-                  `\x1b[32m REMOVED`,
-                );
+              console.log(
+                `\x1b[0m`,
+                `\x1b[31m 🛠`,
+                `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                `\x1b[35m Sun wannabe role`,
+                `\x1b[32m REMOVED`,
               );
               //// Get channel id from the server and find the thread name ///
               let applyChannel = interaction.guild.channels.cache.get(
@@ -105,7 +104,8 @@ module.exports = async (client, config) => {
               await threadName.setArchived(true);
               /// Console Action ///
               console.log(
-                `\x1b[33m  〢`,
+                `\x1b[0m`,
+                `\x1b[31m 〢`,
                 `\x1b[33m ${moment(Date.now()).format("lll")}`,
                 `\x1b[34m ${ap_user.user.username}`,
                 `\x1b[32m REJECTED BY ${interaction.user.username}`,
@@ -125,8 +125,9 @@ module.exports = async (client, config) => {
                 })
                 .catch(() => console.log("Error Line 2713"));
               console.log(
-                `\x1b[31m  🛠`,
-                `\x1b[33m ${moment(Date.now()).format("lll")}`,
+                `\x1b[0m`,
+                `\x1b[31m 🛠`,
+                `\x1b[33m  ${moment(Date.now()).format("lll")}`,
                 `\x1b[33m Permission denied`,
               );
             }

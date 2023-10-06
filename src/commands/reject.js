@@ -50,8 +50,8 @@ module.exports = async (client, config) => {
               embeds: [
                 {
                   title: `${emojis.alert} Permission denied`,
-                  description: `${errors.permsError}`,
-                  color: `${color.gray}`,
+                  description: errors.permsError,
+                  color: color.gray,
                 },
               ],
               //this is the important part
@@ -59,7 +59,7 @@ module.exports = async (client, config) => {
             });
             console.log(
               `\x1b[0m`,
-              `\x1b[31m  🛠`,
+              `\x1b[31m 🛠`,
               `\x1b[33m ${moment(Date.now()).format("lll")}`,
               `\x1b[33m Permission denied`,
             );
@@ -127,7 +127,7 @@ module.exports = async (client, config) => {
       /// Console Action ///
       console.log(
         `\x1b[0m`,
-        `\x1b[31m  〢`,
+        `\x1b[31m 〢`,
         `\x1b[33m ${moment(Date.now()).format("lll")}`,
         `\x1b[34m ${ap_user.user.username}`,
         `\x1b[32m REJECTED BY ${interaction.user.username}`,

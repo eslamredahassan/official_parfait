@@ -16,7 +16,7 @@ module.exports = async (client, config) => {
       switch (interaction.customId) {
         case "#silent_accept":
           {
-            const perms = [`${config.devRole}`, `${config.devRoleTest}`];
+            const perms = [`${config.devRole}`, `${config.STAFF}`];
             let staff = guild.members.cache.get(interaction.user.id);
             if (staff.roles.cache.hasAny(...perms)) {
               const ID = interaction.message.embeds[0].footer.text;
@@ -97,7 +97,9 @@ module.exports = async (client, config) => {
                 ephemeral: false,
               });
               //// Interactions roles ///
-              await ap_user.roles.add([config.SunTest, config.SquadSUN]);
+              await ap_user.roles
+                .add([config.SunTest, config.SquadSUN])
+                .catch(() => console.log("Error Line 2298"));
               console.log(
                 `\x1b[0m`,
                 `\x1b[31m 🛠`,

@@ -22,7 +22,8 @@ module.exports = async (client, config) => {
       switch (interaction.customId) {
         case "#ap_apply": {
           console.log(
-            `\x1b[31m  〢`,
+            `\x1b[0m`,
+            `\x1b[31m 〢`,
             `\x1b[33m ${moment(Date.now()).format("lll")}`,
             `\x1b[34m ${interaction.user.username} USED`,
             `\x1b[35m Apply Button`,
@@ -66,7 +67,8 @@ module.exports = async (client, config) => {
           );
 
           console.log(
-            `\x1b[31m  〢`,
+            `\x1b[0m`,
+            `\x1b[31m 〢`,
             `\x1b[33m ${moment(Date.now()).format("lll")}`,
             `\x1b[35m ${interaction.user.username}`,
             `\x1b[36m TRYING TO`,
@@ -330,23 +332,27 @@ module.exports = async (client, config) => {
 
       //// Console Log Data ///
       console.log(
-        `\x1b[32m  ├`,
+        `\x1b[0m`,
+        `\x1b[32m ├`,
         `\x1b[33m Smash Code:`,
         `\x1b[35m${user_code}`,
       ),
         console.log(`\x1b[32m  ├`, `\x1b[33m Age:`, `\x1b[35m${user_age}`),
         console.log(
-          `\x1b[32m  ├`,
+          `\x1b[0m`,
+          `\x1b[32m ├`,
           `\x1b[33m Competitions/Trainings:`,
           `\x1b[35m${user_ct}`,
         ),
         console.log(
-          `\x1b[32m  ├`,
+          `\x1b[0m`,
+          `\x1b[32m ├`,
           `\x1b[33m Favorite Legends:`,
           `\x1b[35m${user_legends}`,
         ),
         console.log(
-          `\x1b[32m  └`,
+          `\x1b[0m`,
+          `\x1b[32m └`,
           `\x1b[33m What can you bring to SUN:`,
           `\x1b[35m${user_why}`,
         );

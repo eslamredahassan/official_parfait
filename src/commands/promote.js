@@ -47,7 +47,8 @@ module.exports = async (client, config) => {
                 .then((msg) => msg.unpin());
 
               console.log(
-                `\x1b[33m  〢`,
+                `\x1b[0m`,
+                `\x1b[33m 〢`,
                 `\x1b[33m ${moment(Date.now()).format("lll")}`,
                 `\x1b[34m ${ap_user.user.username}`,
                 `\x1b[32m PROMOTED BY ${interaction.user.username}`,
@@ -102,7 +103,8 @@ module.exports = async (client, config) => {
                   .remove(config.SunTest)
                   .catch(() => console.log("Error Line 2414"));
                 console.log(
-                  `\x1b[33m  🛠`,
+                  `\x1b[0m`,
+                  `\x1b[33m 🛠`,
                   `\x1b[33m ${moment(Date.now()).format("lll")}`,
                   `\x1b[33m SunTest role REMOVED`,
                 );
@@ -110,7 +112,8 @@ module.exports = async (client, config) => {
                   .add(config.TeamSun)
                   .catch(() => console.log("Error Line 2420"));
                 console.log(
-                  `\x1b[33m  🛠`,
+                  `\x1b[0m`,
+                  `\x1b[33m 🛠`,
                   `\x1b[33m ${moment(Date.now()).format("lll")}`,
                   `\x1b[33m SquadSUN role ADDED`,
                 );
@@ -129,8 +132,8 @@ module.exports = async (client, config) => {
                   embeds: [
                     {
                       title: `${emojis.alert} Permission denied`,
-                      description: `${errors.permsError}`,
-                      color: `${color.gray}`,
+                      description: errors.permsError,
+                      color: color.gray,
                     },
                   ],
                   //this is the important part
@@ -138,7 +141,8 @@ module.exports = async (client, config) => {
                 })
                 .catch(() => console.log("Error Line 2439"));
               console.log(
-                `\x1b[31m  🛠`,
+                `\x1b[0m`,
+                `\x1b[31m 🛠`,
                 `\x1b[33m ${moment(Date.now()).format("lll")}`,
                 `\x1b[33m Permission denied`,
               );
