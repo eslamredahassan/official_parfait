@@ -267,7 +267,7 @@ module.exports = async (client, config) => {
             await interaction.showModal(report_modal);
           }
           break;
-        case "message_the_developer":
+        case "contact_dev":
           {
             console.log(
               `\x1b[0m`,

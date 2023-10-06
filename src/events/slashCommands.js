@@ -18,7 +18,7 @@ module.exports = async (client, config) => {
         type: "CHAT_INPUT",
       },
       {
-        name: "message_the_developer",
+        name: "contact_dev",
         description: `Send a message to parfait developer`,
         type: "CHAT_INPUT",
       },
