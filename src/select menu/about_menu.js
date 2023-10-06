@@ -65,7 +65,7 @@ module.exports = async (client, config) => {
             await interaction.reply({
               embeds: [
                 {
-                  title: `${emojis.aboutSun} About ${interaction.guild.name}`,
+                  title: `About ${interaction.guild.name}`,
                   description: `**We're glad that you are interested in knowing more about us**`,
                   image: { url: banners.aboutSunBanner },
                   color: color.gray,
@@ -156,7 +156,7 @@ module.exports = async (client, config) => {
                 return await interaction.update({
                   embeds: [
                     {
-                      title: `${emojis.aboutSun} About ${interaction.guild.name}`,
+                      title: `About ${interaction.guild.name}`,
                       description: fieldsText.aboutSun,
                       image: { url: banners.sunBanner },
                       color: color.gray,
@@ -211,7 +211,7 @@ module.exports = async (client, config) => {
                 return await interaction.update({
                   embeds: [
                     {
-                      title: `${emojis.achv} Hall of fame for tourney wins`,
+                      title: `Hall of fame for tourney wins`,
                       description: fieldsText.hallOfFame,
                       image: { url: banners.hofBanner },
                       color: color.gray,
