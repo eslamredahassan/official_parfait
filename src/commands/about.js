@@ -57,7 +57,7 @@ module.exports = async (client, config) => {
               new MessageButton()
                 .setStyle("LINK")
                 .setLabel(`⠀Parfait Status⠀`)
-                .setURL(`https://parfait.pikapod.net/status/parfait`)
+                .setURL(`https://gfs8gj-3001.csb.app/status/parfait`)
                 .setEmoji(emojis.dev),
             ]);
 
