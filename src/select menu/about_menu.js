@@ -14,7 +14,10 @@ const banners = require("../assest/banners.js");
 const color = require("../assest/color.js");
 const emojis = require("../assest/emojis");
 
-module.exports = async (client) => {
+module.exports = async (client, config) => {
+  let guild = client.guilds.cache.get(config.guildID);
+  let Logo = guild.iconURL({ dynamic: true });
+
   client.on("interactionCreate", async (interaction) => {
     if (interaction.isButton()) {
       switch (interaction.customId) {
@@ -34,27 +37,27 @@ module.exports = async (client) => {
                 .addOptions([
                   {
                     label: "About Sun Community",
-                    value: "ASC",
+                    value: "#about_sun",
                     emoji: emojis.aboutSun,
                   },
                   {
                     label: "Hall of fame for tourney wins",
-                    value: "HOFFTW",
+                    value: "#hall_of_fame",
                     emoji: emojis.otherAchv,
                   },
                   {
                     label: "Sun Leaders",
-                    value: "SL",
+                    value: "#sun_leaders",
                     emoji: emojis.leader,
                   },
                   {
                     label: "Staff Members",
-                    value: "SM",
+                    value: "#sun_staff_members",
                     emoji: emojis.staff,
                   },
                   {
                     label: "Our Partners",
-                    value: "OP",
+                    value: "#our_partners",
                     emoji: emojis.partner,
                   },
                 ]),
@@ -62,7 +65,7 @@ module.exports = async (client) => {
             await interaction.reply({
               embeds: [
                 {
-                  title: `About ${interaction.guild.name}`,
+                  title: `${emojis.aboutSun} About ${interaction.guild.name}`,
                   description: `**We're glad that you are interested in knowing more about us**`,
                   image: { url: banners.aboutSunBanner },
                   color: color.gray,
@@ -88,7 +91,7 @@ module.exports = async (client) => {
           client.on("interactionCreate", async (interaction) => {
             if (interaction.isSelectMenu()) {
               let choice = interaction.values[0];
-              if (choice == "ASC") {
+              if (choice == "#about_sun") {
                 const controll = new MessageActionRow().addComponents([
                   new MessageButton()
                     .setStyle(5)
@@ -100,12 +103,14 @@ module.exports = async (client) => {
                   new MessageButton()
                     .setStyle(5)
                     .setLabel(`Twitch`)
-                    .setURL(`https://www.twitch.tv/suncosmash`)
+                    .setURL(`https://www.twitch.tv/sunco#sun_staff_membersash`)
                     .setEmoji(emojis.twitch),
                   new MessageButton()
                     .setStyle(5)
                     .setLabel(`Battlefy`)
-                    .setURL(`https://battlefy.com/sunco-smash-legends`)
+                    .setURL(
+                      `https://battlefy.com/sunco-#sun_staff_membersash-legends`,
+                    )
                     .setEmoji(emojis.battlefy),
                 ]);
 
@@ -116,28 +121,28 @@ module.exports = async (client) => {
                     .addOptions([
                       {
                         label: "About Sun Community",
-                        value: "ASC",
+                        value: "#about_sun",
                         default: true,
                         emoji: emojis.aboutSun,
                       },
                       {
                         label: "Hall of fame for tourney wins",
-                        value: "HOFFTW",
+                        value: "#hall_of_fame",
                         emoji: emojis.otherAchv,
                       },
                       {
                         label: "Sun Leaders",
-                        value: "SL",
+                        value: "#sun_leaders",
                         emoji: emojis.leader,
                       },
                       {
                         label: "Staff Members",
-                        value: "SM",
+                        value: "#sun_staff_members",
                         emoji: emojis.staff,
                       },
                       {
                         label: "Our Partners",
-                        value: "OP",
+                        value: "#our_partners",
                         emoji: emojis.partner,
                       },
                     ]),
@@ -153,7 +158,7 @@ module.exports = async (client) => {
                 return await interaction.update({
                   embeds: [
                     {
-                      title: `About ${interaction.guild.name}`,
+                      title: `${emojis.aboutSun} About ${interaction.guild.name}`,
                       description: fieldsText.aboutSun,
                       image: { url: banners.sunBanner },
                       color: color.gray,
@@ -163,7 +168,7 @@ module.exports = async (client) => {
                   ephemeral: true,
                   components: [controll, aboutmenu],
                 });
-              } else if (choice == "HOFFTW") {
+              } else if (choice == "#hall_of_fame") {
                 const aboutmenu = new MessageActionRow().addComponents(
                   new MessageSelectMenu()
                     .setCustomId("#about-menu")
@@ -171,28 +176,28 @@ module.exports = async (client) => {
                     .addOptions([
                       {
                         label: "About Sun Community",
-                        value: "ASC",
+                        value: "#about_sun",
                         emoji: emojis.aboutSun,
                       },
                       {
                         label: "Hall of fame for tourney wins",
-                        value: "HOFFTW",
+                        value: "#hall_of_fame",
                         default: true,
                         emoji: emojis.otherAchv,
                       },
                       {
                         label: "Sun Leaders",
-                        value: "SL",
+                        value: "#sun_leaders",
                         emoji: emojis.leader,
                       },
                       {
                         label: "Staff Members",
-                        value: "SM",
+                        value: "#sun_staff_members",
                         emoji: emojis.staff,
                       },
                       {
                         label: "Our Partners",
-                        value: "OP",
+                        value: "#our_partners",
                         emoji: emojis.partner,
                       },
                     ]),
@@ -208,7 +213,7 @@ module.exports = async (client) => {
                 return await interaction.update({
                   embeds: [
                     {
-                      title: `Hall of fame for tourney wins`,
+                      title: `${emojis.achv} Hall of fame for tourney wins`,
                       description: fieldsText.hallOfFame,
                       image: { url: banners.hofBanner },
                       color: color.gray,
@@ -218,7 +223,7 @@ module.exports = async (client) => {
                   ephemeral: true,
                   components: [aboutmenu],
                 });
-              } else if (choice == "SM") {
+              } else if (choice == "#sun_staff_members") {
                 const aboutmenu = new MessageActionRow().addComponents(
                   new MessageSelectMenu()
                     .setCustomId("#about-menu")
@@ -226,28 +231,28 @@ module.exports = async (client) => {
                     .addOptions([
                       {
                         label: "About Sun Community",
-                        value: "ASC",
+                        value: "#about_sun",
                         emoji: emojis.aboutSun,
                       },
                       {
                         label: "Hall of fame for tourney wins",
-                        value: "HOFFTW",
+                        value: "#hall_of_fame",
                         emoji: emojis.otherAchv,
                       },
                       {
                         label: "Sun Leaders",
-                        value: "SL",
+                        value: "#sun_leaders",
                         emoji: emojis.leader,
                       },
                       {
                         label: "Staff Members",
-                        value: "SM",
+                        value: "#sun_staff_members",
                         default: true,
                         emoji: emojis.staff,
                       },
                       {
                         label: "Our Partners",
-                        value: "OP",
+                        value: "#our_partners",
                         emoji: emojis.partner,
                       },
                     ]),
@@ -272,7 +277,7 @@ module.exports = async (client) => {
                   ephemeral: true,
                   components: [aboutmenu],
                 });
-              } else if (choice == "SL") {
+              } else if (choice == "#sun_leaders") {
                 const aboutmenu = new MessageActionRow().addComponents(
                   new MessageSelectMenu()
                     .setCustomId("#about-menu")
@@ -280,28 +285,28 @@ module.exports = async (client) => {
                     .addOptions([
                       {
                         label: "About Sun Community",
-                        value: "ASC",
+                        value: "#about_sun",
                         emoji: emojis.aboutSun,
                       },
                       {
                         label: "Hall of fame for tourney wins",
-                        value: "HOFFTW",
+                        value: "#hall_of_fame",
                         emoji: emojis.otherAchv,
                       },
                       {
                         label: "Sun Leaders",
-                        value: "SL",
+                        value: "#sun_leaders",
                         default: true,
                         emoji: emojis.leader,
                       },
                       {
                         label: "Staff Members",
-                        value: "SM",
+                        value: "#sun_staff_members",
                         emoji: emojis.staff,
                       },
                       {
                         label: "Our Partners",
-                        value: "OP",
+                        value: "#our_partners",
                         emoji: emojis.partner,
                       },
                     ]),
@@ -327,7 +332,7 @@ module.exports = async (client) => {
                   ephemeral: true,
                   components: [aboutmenu],
                 });
-              } else if (choice == "OP") {
+              } else if (choice == "#our_partners") {
                 const aboutmenu = new MessageActionRow().addComponents(
                   new MessageSelectMenu()
                     .setCustomId("#about-menu")
@@ -335,27 +340,27 @@ module.exports = async (client) => {
                     .addOptions([
                       {
                         label: "About Sun Community",
-                        value: "ASC",
+                        value: "#about_sun",
                         emoji: emojis.aboutSun,
                       },
                       {
                         label: "Hall of fame for tourney wins",
-                        value: "HOFFTW",
+                        value: "#hall_of_fame",
                         emoji: emojis.otherAchv,
                       },
                       {
                         label: "Sun Leaders",
-                        value: "SL",
+                        value: "#sun_leaders",
                         emoji: emojis.leader,
                       },
                       {
                         label: "Staff Members",
-                        value: "SM",
+                        value: "#sun_staff_members",
                         emoji: emojis.staff,
                       },
                       {
                         label: "Our Partners",
-                        value: "OP",
+                        value: "#our_partners",
                         default: true,
                         emoji: emojis.partner,
                       },
