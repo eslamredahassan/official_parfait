@@ -11,10 +11,7 @@ const banners = require("../assest/banners.js");
 const color = require("../assest/color.js");
 const emojis = require("../assest/emojis");
 
-module.exports = async (client, config) => {
-  let guild = client.guilds.cache.get(config.guildID);
-  let Logo = guild.iconURL({ dynamic: true });
-
+module.exports = async (client) => {
   client.on("interactionCreate", async (interaction) => {
     if (interaction.isButton()) {
       switch (interaction.customId) {
@@ -560,7 +557,6 @@ module.exports = async (client, config) => {
             }
           });
           break;
-        default:
       }
     }
   });
