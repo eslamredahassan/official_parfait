@@ -7,6 +7,9 @@ module.exports = {
   openBanner: `https://i.imgur.com/sH4bSVG.png`,
   maintenance: `https://i.imgur.com/PH1kyqf.png`,
   maintenanceIcon: `https://i.imgur.com/mwZ3A1C.png`,
+  langBanner: `https://i.imgur.com/Ih8t7fc.png`,
+  readyBanner: `https://i.imgur.com/8QXEnRj.png`,
+  sorryBanner: `https://i.imgur.com/uEGEBRc.png`,
   stepTwoBanner: `https://i.imgur.com/q7gjarW.png`,
   //--------------------------------------//,
 

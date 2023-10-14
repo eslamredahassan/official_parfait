@@ -2,8 +2,8 @@ module.exports = {
   //------------| Bot Token |------------//
   token: process.env.token,
   clientID: process.env.clientID,
- //--------------------------------------//
-  
+  //--------------------------------------//
+
   //----------| Apply embed room |---------//
   applyChannel: process.env.applyChannel,
   //--------------------------------------//
@@ -17,13 +17,13 @@ module.exports = {
   TeamSun: process.env.TeamSun,
   SunTest: process.env.SunTest,
   //--------------------------------------//
-  
+
   //----| Banned member from app role |----//
   banRole: process.env.banRole,
   coolDown: process.env.coolDown,
   //--------------------------------------//
-  
-   //-----| Staff and Staff Sun role |----//
+
+  //-----| Staff and Staff Sun role |----//
   STAFF: process.env.STAFF,
   staffRole: process.env.staffRole,
   staffSun: process.env.staffSun,
@@ -41,6 +41,12 @@ module.exports = {
   adminRole: process.env.adminRole,
   //--------------------------------------//
 
+  //------| Languages Roles |------//
+  en_eu: process.env.en_eu,
+  en_na: process.env.en_na,
+  fr: process.env.fr,
+  //--------------------------------------//,
+
   //---| accepted embed messages rooms |---//
   recruitmentChannel: process.env.recruitmentChannel,
   announcesChannel: process.env.announcesChannel,
@@ -52,10 +58,10 @@ module.exports = {
   reportBugChannel: process.env.reportBugChannel,
   dmDevChannel: process.env.dmDevChannel,
   log: process.env.log,
- //--------------------------------------//,
-  
-//-----------| Developer Log |-----------//
-   Dev_Log:  process.env.dev_log,
-   devRole: process.env.devRole
-//--------------------------------------//,
+  //--------------------------------------//,
+
+  //-----------| Developer Log |-----------//
+  Dev_Log: process.env.dev_log,
+  devRole: process.env.devRole,
+  //--------------------------------------//,
 };
