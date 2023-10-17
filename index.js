@@ -47,7 +47,7 @@ client.on("ready", async () => {
   const unfreeze_command = require(`./src/commands/unfreeze`)(client, config);
   // -------------------------------------//
 
-  // ------ Application Interactions ------- //
+  // ------ Buttons Interactions ------- //
   const apply = require(`./src/buttons/apply`)(client, config);
   const accept = require(`./src/buttons/accept`)(client, config);
   const silent_accept = require(`./src/buttons/silent_accept`)(client, config);
