@@ -348,7 +348,7 @@ module.exports = async (client) => {
                         },
                         {
                           name: `Can I apply while I'm in the cooldown period?`,
-                          value: fieldsText.canApplyInCooldown,
+                          value: fieldsText.inCooldownPeriod,
                           inline: false,
                         },
                         {

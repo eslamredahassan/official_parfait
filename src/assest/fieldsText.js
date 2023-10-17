@@ -1,7 +1,6 @@
+const emojis = require("../assest/emojis");
 const moment = require("moment");
 require("moment-duration-format");
-
-const emojis = require("../assest/emojis");
 const members = require("../assest/members");
 
 module.exports = {
@@ -10,11 +9,11 @@ module.exports = {
 
   level: `${emojis.level} Level 90+${emojis.required}`,
 
-  cooldownNote: `${emojis.threadMark} You can apply again after cooldown duration`,
+  cooldownNote: `${emojis.threadMarkmid} We apply a cooldown **30 days** for failed application for first time\n${emojis.threadMarkmid} The cooldown period will be doubled per rejected application\n${emojis.threadMark} You can apply again after cooldown duration\n`,
 
-  warning: `${emojis.threadMarkmid} Complete your application inside your thread\n${emojis.threadMarkmid} After applying, stay alert in your thread post\n${emojis.threadMarkmid} Reviewing the application may take a long time\n ${emojis.threadMark} Un-compeleted application will be rejected`,
+  warning: `${emojis.threadMarkmid} Complete your application inside your thread\n${emojis.threadMarkmid} After completing your application, stay alert in your thread\n${emojis.threadMarkmid} Reviewing the application may take a long time\n${emojis.threadMarkmid} Make sure your DM is opened, we may message you\n${emojis.threadMark} Incompeleted application will be rejected`,
 
-  importantNote: `${emojis.threadMark} Required rank isn't important in the first week of each season`,
+  importantNote: `${emojis.threadMark} Required rank isn't important in **the first week of each season**⠀`,
   //--------------------------------------//,
 
   ///---| DM Messages |---///
@@ -26,9 +25,9 @@ module.exports = {
   //---| About Parfait UI |---///
   programed: `${emojis.threadMark} ${members.egy}`,
 
-  build: `${emojis.threadMark} \`\`12.6.7\`\``,
+  build: `${emojis.threadMark} \`\`^13.7.0\`\``,
 
-  version: `${emojis.threadMark} \`\`4.6.2\`\``,
+  version: `${emojis.threadMark} \`\`^4.6.2\`\``,
 
   contact: `${emojis.threadMark} Contact with ${members.egy} for all details`,
   //--------------------------------------//,
@@ -41,6 +40,8 @@ module.exports = {
   devMessage: `${emojis.threadMarkmid} This is a maintenance mode, this mode only for the developers\n${emojis.threadMark} Please don't use it if you are not a developer`,
 
   noteMessage: `${emojis.threadMarkmid} There's a button for switch between open and close modes\n${emojis.threadMark} You don't need to use the command to switch between modes`,
+
+  noDevNote: `${emojis.threadMark} No Developer Note`,
 
   //--------------------------------------//,
 
@@ -62,6 +63,7 @@ module.exports = {
   withoutApply: `- No you can't, you need to apply first`,
   multipleAcconts: `- No you can't, since the in-game clan is limited`,
   joinAnotherClan: `- It's up to you, you will only be charged on your main account (account that you used to apply to Sun)`,
+  inCooldownPeriod: `- You'll be in the cooldown period`,
   inPeriodTrial: `- You'll be in the trial period`,
   periodTrial: `- The trial period is the last test period\n - You need to prove yourself as a Sun member`,
   doInPeriod: `- Join the other Sun members and play together\n - Be active on the Discord server\n - Join Sun training\n - Join the tournaments and competitions like Sun Battlefield`,

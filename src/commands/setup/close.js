@@ -8,6 +8,7 @@ require("moment-duration-format");
 const interface = require("../../assest/interface");
 const responses = require("../../assest/responses");
 const fieldsText = require("../../assest/fieldsText");
+const errors = require("../../assest/errors.js");
 const banners = require("../../assest/banners");
 const color = require("../../assest/color");
 const emojis = require("../../assest/emojis");
