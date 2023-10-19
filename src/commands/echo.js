@@ -5,6 +5,7 @@ const wait = require("util").promisify(setTimeout);
 const cooldown = new Set();
 require("moment-duration-format");
 
+const banners = require("../assest/banners.js");
 const errors = require("../../src/assest/errors.js");
 const color = require("../../src/assest/color.js");
 const emojis = require("../../src/assest/emojis");
@@ -46,7 +47,17 @@ module.exports = async (client, config) => {
                   ephemeral: true,
                 });
               } catch (error) {
-                console.log(error.message);
+                await interaction.reply({
+                  embeds: [
+                    {
+                      title: `${emojis.alert} Oops!`,
+                      description: `${emojis.threadMark} I don't have access to ${echoChannel} channel`,
+                      color: color.gray,
+                    },
+                  ],
+                  //this is the important part
+                  ephemeral: true,
+                });
               }
             } else {
               await interaction.reply({
