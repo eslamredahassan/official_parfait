@@ -9,8 +9,12 @@
 
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
+    "test": {
+      "name": "test",
+      "command": "npm run test"
+    },
     "node .": {
-      "name": "Official Parfait",
+      "name": "Parfait Official",
       "command": "node .",
       "runAtStart": true,
       "preview": {
