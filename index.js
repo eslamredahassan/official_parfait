@@ -50,8 +50,6 @@ client.on("ready", async () => {
       }
     });
   });
-  await wait(2 * 60 * 1000);
-
   // The directory where your select menu files are stored
   const selectMenuDirectory = path.join(__dirname, "src/select menu");
   // Read all files in the directory
