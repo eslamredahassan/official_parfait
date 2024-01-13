@@ -14,7 +14,7 @@ const databaseConnection = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         serverSelectionTimeoutMS: 120000,
-        dbName: "OfficialParfait",
+        //dbName: "OfficialParfait",
       });
 
       console.log(
