@@ -4,8 +4,8 @@ const config = require("../config");
 
 const databaseConnection = async () => {
   let retryCount = 0;
-  const maxRetries = 5;
-  const retryInterval = 20 * 1000; // 20 seconds in milliseconds
+  const maxRetries = 10;
+  const retryInterval = 10 * 1000; // 20 seconds in milliseconds
   //mongoose.set("debug", true);
 
   const connection = async () => {
@@ -14,7 +14,7 @@ const databaseConnection = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         serverSelectionTimeoutMS: 120000,
-        dbName: "OfficialParfait",
+        //dbName: "OfficialParfait",
       });
 
       console.log(
