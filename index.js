@@ -26,6 +26,7 @@ const client = new Client({
 client.on("ready", async () => {
   antiCrash(client, config);
   deployCommands(client, config);
+  server(client, config);
   //await database(client, config);
   // The directory where your select menu files are stored
   const databseDirectory = path.join(__dirname, "src/database");
