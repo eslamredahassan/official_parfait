@@ -11,6 +11,7 @@ const server = require("./src/utils/server");
 const logo = require("./src/assest/logo");
 const moment = require("moment");
 const database = require("./src/database/connect");
+
 const client = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
