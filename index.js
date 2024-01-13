@@ -26,8 +26,10 @@ const client = new Client({
 client.on("ready", async () => {
   antiCrash(client, config);
   deployCommands(client, config);
+  await database(client, config);
+  await wait(2 * 60 * 1000);
   // The directory where your select menu files are stored
-  const databseDirectory = path.join(__dirname, "src/database");
+  const databseDirectory = path.join(__dirname, "src/database/models");
   // Read all files in the directory
   fs.readdir(databseDirectory, (error, files) => {
     if (error) {
