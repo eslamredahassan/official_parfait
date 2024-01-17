@@ -166,7 +166,7 @@ module.exports = async (client, config) => {
                     `${emojis.app} ${interaction.guild.name}\n${emojis.threadMark}Recruitments Application System`,
                   )
                   .setDescription(interface.MainUImessage)
-                  .setThumbnail(Logo)
+                  .setThumbnail("https://i.imgur.com/7WEaIRD.png")
                   .setImage(banners.closeBanner)
                   .addFields(
                     {
@@ -342,7 +342,7 @@ module.exports = async (client, config) => {
                     `${emojis.app} ${interaction.guild.name}\n${emojis.threadMark}Recruitments Application System`,
                   )
                   .setDescription(interface.MainUImessage)
-                  .setThumbnail(Logo)
+                  .setThumbnail("https://i.imgur.com/7WEaIRD.png")
                   .setImage(banners.closeBanner)
                   .addFields(
                     {
