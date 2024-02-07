@@ -58,7 +58,7 @@ module.exports = async (client, config) => {
               const expiryDate = new Date();
               expiryDate.setDate(expiryDate.getDate() + expiryInDays);
 
-              const Cooldown = new Cooldown({
+              const cooldown = new Cooldown({
                 userId: application.userId,
                 guildId: guild.id,
                 roleId: config.coolDown,
@@ -66,7 +66,7 @@ module.exports = async (client, config) => {
               });
 
               try {
-                await Cooldown.save();
+                await cooldown.save();
               } catch (error) {
                 console.log(
                   `\x1b[0m`,
@@ -81,7 +81,7 @@ module.exports = async (client, config) => {
                 .setTitle(`${emojis.alert} ${application.username} Left SUN`)
                 .setColor(color.gray)
                 .setImage(banners.canceled)
-                .setThumbnail(canceledIcon)
+                .setThumbnail(banners.canceledIcon)
                 .setTimestamp();
               /// Edit Review Embed ///
               await message
